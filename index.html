@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!--Кодировка-->
+  <meta charset="utf-8">
+  <!--Титул сайта-->
+  <title>Homework#8</title>
+  <!--  My scripts-->
+  <script src="js/toggleList.js" defer></script>
+  <script src="js/script.js" defer></script>
+  <!--jQuery-->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!--Подключаем свои стили-->
+  <link rel="stylesheet" href="style/style.min.css">
+  <!--Viewport-->
+  <meta name="viewport"
+        content="width=device-width,
+          user-scalable=no,
+          initial-scale=1.0,
+          maximum-scale=1.0,
+          minimum-scale=1.0">
+</head>
+<body>
+  <div class="preloader">
+    <svg class="preloader__image" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+        <path fill="currentColor"
+              d="M304 48c0 26.51-21.49 48-48 48s-48-21.49-48-48 21.49-48 48-48 48 21.49 48 48zm-48 368c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zm208-208c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.49-48-48-48zM96 256c0-26.51-21.49-48-48-48S0 229.49 0 256s21.49 48 48 48 48-21.49 48-48zm12.922 99.078c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.491-48-48-48zm294.156 0c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48c0-26.509-21.49-48-48-48zM108.922 60.922c-26.51 0-48 21.49-48 48s21.49 48 48 48 48-21.49 48-48-21.491-48-48-48z">
+        </path>
+    </svg>
+</div>
+  <form id="toggle-form" class="toggle-form">
+    <span class="toggle-form__article">Write any other</span>
+    <div class="toggle-form__work-frame">
+      <input type="text">
+      <button id="btn">click me</button>
+    </div>
+    <div class="container"></div>
+  </form>
+</body>
+</html>
