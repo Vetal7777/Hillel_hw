@@ -1,17 +1,14 @@
-.list-container{
-    display: flex;
+#list-container{
     border: 1px solid black;
     min-height: 50vh;
-    overflow-y: auto;
-}
-.li{
-    flex-basis: 33%;
-    display: flex;
-    flex-direction: column;
 }
 .title{
     font-weight: bold;
 }
-.span{
-    overflow-x: auto;
+.list-row{
+    display: flex;
+}
+.column{
+    flex-basis: 33%;
+    flex-grow: 1;
 }

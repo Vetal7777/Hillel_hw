@@ -1,9 +1,5 @@
-const todoContainerNameE = getE('name-list');
-//Наша Todo name поле с результатом
-const todoContainerSurnameE = getE('surname-list');
-//Наша Todo surname поле с результатом
-const todoContainerPhoneE = getE('phone-list');
-//Наша Todo phone поле с результатом
+const todoContainerNameE = getE('list-container');
+//Наш todo
 const inpNameE = getE('inp-name');
 //Нащ input name
 const inpSurnameE = getE('inp-surname');
@@ -29,19 +25,18 @@ function onAddTodo(){
         !name.trim()
         || !surname.trim()
         || !phone.trim()
+        || !Number(phone)
     ){
         alert('Please add some text to todo');
+        clearValue(inpPhoneE);
+        inpPhoneE.focus();
         return;
     }
     //Условие если пустой один из input
-    const NameE = createToDoE(name);
-    const SurnameE = createToDoE(surname);
-    const PhoneE = createToDoE(phone);
+    const todoE = createToDoE(name,surname,phone);
     //Константа ...E - это теперь наш HTML который мы создали с
     //помощью функции
-    addElement(NameE,todoContainerNameE);
-    addElement(SurnameE,todoContainerSurnameE);
-    addElement(PhoneE,todoContainerPhoneE);
+    addElement(todoE,todoContainerNameE);
     //Добавляем наш элемент в наш ul
     clearValue(inpNameE);
     clearValue(inpSurnameE);
@@ -63,8 +58,11 @@ function getE(id){
 //My func
 //get element
 
-function createToDoE(elem){
-    const result = SampleE.innerHTML.replace(`{{sample}}`,elem);
+function createToDoE(Name,Surname,Phone){
+    const result = SampleE.innerHTML
+        .replace(`{{Name}}`,Name)
+        .replace(`{{Surname}}`,Surname)
+        .replace(`{{Phone}}`,Phone);
     //ставит вместо элементов который мы указали - значения input
     return result;
 }
