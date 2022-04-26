@@ -65,9 +65,7 @@ function onClickDo(event) {
         //переменная item = все html элемента до родителя с классом .table-items-wrapper
         item.remove();
         //Удаляем данную переменную
-    }else if (event.target.id === 'reminder-one'){
-        //если id обьекта на который мы нажали = list-containe то происходит следующее
-        const item = event.target.closest("#reminder-one");
-        item.classList.toggle('yellow');
     }
+    const item = event.target.closest("#reminder-one");
+    item.classList.toggle('yellow');
 }

@@ -7,8 +7,6 @@ div#reminder-one {
     box-sizing: border-box;
     overflow-x: auto;
     width: 100%;
-    font-family: Arial;
-    font-size: small;
     position: relative;
     display: flex;
     justify-content: space-between;
@@ -27,6 +25,7 @@ div#reminder-one p {
     display: flex;
     justify-content: flex-start;
     width: 100%;
+
 }
 div#reminder-one .condition {
     min-width: 25px;
@@ -122,4 +121,3 @@ body {
     overflow: auto;
     max-height: 80vh;
 }
-
