@@ -15,6 +15,13 @@ div#reminder-one {
     align-items: center;
     padding: 10px;
     column-gap: 30px;
+    cursor: pointer;
+}
+div#reminder-one:hover .condition{
+    background-color: lightgrey;
+}
+div#reminder-one:hover #exit span{
+    background-color: darkred;
 }
 div#reminder-one p {
     display: flex;
