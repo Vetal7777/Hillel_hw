@@ -1,14 +1,26 @@
 #list-container{
+    display: flex;
     border: 1px solid black;
     min-height: 50vh;
+    overflow-y: auto;
+    flex-direction: column;
 }
-.title{
-    font-weight: bold;
-}
-.list-row{
+div#reminder-one{
+    overflow-x: auto;
+    width: 100%;
+    background-color: lightgreen;
+    position: relative;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
-.column{
-    flex-basis: 33%;
-    flex-grow: 1;
+#exit{
+    padding: 10px;
+    color: red;
+    font-weight: bold;
+    cursor: pointer;
 }
+#reminder-one.yellow{
+    background-color: yellow;
+}
+
