@@ -1,26 +1,118 @@
-#list-container{
+#list-container {
     display: flex;
-    border: 1px solid black;
     min-height: 50vh;
-    overflow-y: auto;
     flex-direction: column;
 }
-div#reminder-one{
+div#reminder-one {
+    box-sizing: border-box;
     overflow-x: auto;
     width: 100%;
-    background-color: lightgreen;
+    font-family: Arial;
+    font-size: small;
     position: relative;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-#exit{
     padding: 10px;
-    color: red;
-    font-weight: bold;
-    cursor: pointer;
+    column-gap: 30px;
 }
-#reminder-one.yellow{
-    background-color: yellow;
+div#reminder-one p {
+    display: flex;
+    justify-content: flex-start;
+    width: 100%;
+}
+div#reminder-one .condition {
+    min-width: 25px;
+    min-height: 25px;
+    border-radius: 50%;
+    border: 1px solid lightgrey;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#exit {
+    padding: 0;
+    cursor: pointer;
+    display: flex;
+    flex-direction: row-reverse;
+    min-width: 24px;
+    position: relative;
+    min-height: 24px;
+    box-sizing: border-box;
+    margin: 0 10px 0 0;
+}
+#exit span{
+    position: absolute;
+    background-color: lightgrey;
+    width: 24px;
+    height: 1px;
+    top: 12px;
+}
+#exit span:first-child {
+    transform: rotate(45deg);
+}
+#exit span:nth-child(2) {
+    transform: rotate(135deg);
+}
+#reminder-one.yellow .condition span{
+    background-color: #0085ff;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+
+}
+.btn-container{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    flex-direction: row-reverse;
+    column-gap: 20px;
+    justify-content: flex-end;
+}
+#btn{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    background-color: #0085ff;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    font-size: 33px;
+    padding: 0;
+    border: none;
+}
+#inp::placeholder{
+    color: #0085ff;
+}
+input#inp {
+    padding: 0;
+    font-weight: bold;
+    border: none;
+    font-size: x-large;
+}
+input[type="text" i] {
+    padding: 0;
+    margin: 0;
+    width: auto;
+    height: auto;
+}
+input#inp:focus-visible {
+    border: none;
+    outline: none;
+    color: #0085ff;
+}
+body {
+    background-color: lightgrey;
+    display: flex;
+    align-items: center;
+    height: 100vh;
+    justify-content: center;
+}
+.container{
+    background-color: white;
+    border-radius: 15px;
+    overflow: auto;
+    max-height: 80vh;
 }
 

@@ -7,8 +7,14 @@ const btnE = getE('btn');
 //Наша кнопка
 const SampleE = (reminder) =>
     `<div id="reminder-one">
-        ${reminder}
-        <span id="exit">x</span>
+        <span class="condition">
+            <span></span>
+        </span>
+        <p>${reminder}</p>
+        <span id="exit">
+            <span></span>
+            <span></span>
+        </span>
     </div>`;
 //Наш шаблон
 
@@ -20,7 +26,11 @@ todoContainerE.addEventListener("click", onClickDo);
 function onAddTodo(){
     const inp = inpE.value;
     //name - содержимое inpNameE
-    validate(inpE);
+    if(!(inpE.value).trim()){
+        alert('Please add some text to todo');
+        inpE.focus();
+        return;
+    }
     //Условие если пустой один из input
     const resultE = SampleE(inp);
     //Константа ...E - это теперь наш HTML который мы создали с
@@ -47,15 +57,6 @@ function getE(id){
 }
 //My func
 //get element
-
-function validate(input){
-    if(!(input.value).trim()){
-        alert('Please add some text to todo');
-        input.focus();
-    }
-    //Условие если пустой один из input
-}
-//Валидация input
 
 function onClickDo(event) {
     if (event.target.id === "exit") {
