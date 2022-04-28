@@ -79,15 +79,23 @@ div#reminder-one .condition {
     display: flex;
     align-items: center;
     justify-content: center;
-    color: white;
     background-color: #0085ff;
     border-radius: 50%;
     width: 30px;
     height: 30px;
-    font-size: 33px;
     padding: 0;
+    margin: 0;
     border: none;
-    line-height: 1;
+    position: relative;
+}
+#btn span{
+    height: 3px;
+    background-color: white;
+    width: 15px;
+}
+#btn span:first-child{
+    position: absolute;
+    transform: rotateZ(90deg);
 }
 #btn:disabled{
     opacity: 0.5;

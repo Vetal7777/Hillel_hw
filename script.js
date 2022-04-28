@@ -51,6 +51,7 @@ function onAddTodo(){
 //    Чистим все
     inpE.focus();
 //    Фокус ставим на input
+    btnE.disabled = true;
 }
 
 function addElement(elem,container){
