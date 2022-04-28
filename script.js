@@ -1,10 +1,14 @@
 const todoContainerE = getE('list-container');
 //Наша Todo phone поле с результатом
-const reminderElements = document.querySelectorAll('#reminder-one');
+const reminderElements = document
+    .querySelectorAll('#reminder-one');
 const inpE = getE('inp');
 //Нащ input name
 const btnE = getE('btn');
 //Наша кнопка
+const errorE = document
+    .querySelector('.error');
+//контейнер ошибки
 const SampleE = (reminder) =>
     `<div id="reminder-one">
         <span class="condition">
@@ -18,10 +22,16 @@ const SampleE = (reminder) =>
     </div>`;
 //Наш шаблон
 
+btnE.disabled = true;
+//Поумолчанию кнопка не активна
+inpE.addEventListener('keyup',forInput);
+//При отпускании клавиши запускается функция validateTodo
 btnE.addEventListener('click',onAddTodo);
 //При клике запуская функцию onAddTodo
 todoContainerE.addEventListener("click", onClickDo);
 //При клике на крестик запускается функция onClickDeleteReminder
+inpE.focus();
+//Фокус ставим на input
 
 function onAddTodo(){
     const inp = inpE.value;
@@ -40,6 +50,7 @@ function onAddTodo(){
     clearValue(inpE);
 //    Чистим все
     inpE.focus();
+//    Фокус ставим на input
 }
 
 function addElement(elem,container){
@@ -69,3 +80,67 @@ function onClickDo(event) {
     const item = event.target.closest("#reminder-one");
     item.classList.toggle('yellow');
 }
+//Удаление при клике на соответвующую кнопку
+
+function validateTodo(e){
+    if(!e.target.value.trim()){
+        //если элемент пустой или одни пробелы
+        errorE.innerText = '';
+        //то текст внутри errorE пустой
+        btnE.disabled = true;
+        //Кнопка не активна
+        if([...errorE.classList].includes('active')){
+            errorE.classList.toggle('active');
+        }
+        //Если у элемента errorE есть класс active
+        //то мы его удаляем
+        return;
+        //Выходим из функции
+    }
+    if(e.target.value.trim().length <= 3){
+        //Если текст меньше или равен трем символам
+        errorE.innerText = 'Error , lenght should be > 3';
+        //То выскакивает ошибка
+        btnE.disabled = true;
+        //Кнопка не активна
+        if(![...errorE.classList].includes('active')){
+            errorE.classList.toggle('active');
+        }
+        //Если у элемента errorE нету класса active
+        //то мы его добавляем
+        return;
+        //Выходим
+    }
+    if([...errorE.classList].includes('active')){
+        errorE.classList.toggle('active');
+    }
+    //Если у элемента errorE есть класс active
+    //то мы его удаляем
+    errorE.innerText = '';
+    //В других случиях поле ошибки пустое
+    btn.disabled = false;
+    //Кнопка активна
+}
+//Валидация Todo
+
+function enterInput(e){
+    if(btnE.disabled === false
+        && e.keyCode === 13){
+        onAddTodo();
+    }
+}
+//При нажатии Enter запускается функция onAddTodo
+
+function shiftBackspaceInput(e){
+    if(e.keyCode === 8 && e.shiftKey === true){
+       inpE.value = '';
+    }
+}
+//Удаляет при сочетании клавиш shift + backspace
+
+function forInput(e){
+    shiftBackspaceInput(e);
+    enterInput(e);
+    validateTodo(e);
+}
+//Функции для input

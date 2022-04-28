@@ -24,8 +24,9 @@ div#reminder-one:hover #exit span{
 div#reminder-one p {
     display: flex;
     justify-content: flex-start;
+    font-family: sans-serif;
+    font-size: small;
     width: 100%;
-
 }
 div#reminder-one .condition {
     min-width: 25px;
@@ -65,7 +66,6 @@ div#reminder-one .condition {
     width: 15px;
     height: 15px;
     border-radius: 50%;
-
 }
 .btn-container{
     display: flex;
@@ -87,6 +87,10 @@ div#reminder-one .condition {
     font-size: 33px;
     padding: 0;
     border: none;
+    line-height: 1;
+}
+#btn:disabled{
+    opacity: 0.5;
 }
 #inp::placeholder{
     color: #0085ff;
@@ -120,4 +124,20 @@ body {
     border-radius: 15px;
     overflow: auto;
     max-height: 80vh;
+    position: relative;
+}
+.error{
+    position: absolute;
+    border-radius: 12px;
+    background-color: lightgrey;
+    color: grey;
+    padding: 5px;
+    font-family: sans-serif;
+    font-size: smaller;
+    right: 2vw;
+    top: 10px;
+    opacity: 0;
+}
+.error.active{
+    opacity: 0.7;
 }
