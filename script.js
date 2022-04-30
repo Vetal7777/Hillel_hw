@@ -1,7 +1,5 @@
 const todoContainerE = getE('list-container');
 //Наша Todo phone поле с результатом
-const reminderElements = document
-    .querySelectorAll('#reminder-one');
 const inpE = getE('inp');
 //Нащ input name
 const btnE = getE('btn');
@@ -10,12 +8,12 @@ const errorE = document
     .querySelector('.error');
 //контейнер ошибки
 const SampleE = (reminder) =>
-    `<div id="reminder-one">
+    `<div class="reminder-one">
         <span class="condition">
             <span></span>
         </span>
         <p>${reminder}</p>
-        <span id="exit">
+        <span class="exit">
             <span></span>
             <span></span>
         </span>
@@ -71,17 +69,23 @@ function getE(id){
 //get element
 
 function onClickDo(event) {
-    if (event.target.id === "exit") {
+    if (event.target.className === "exit") {
         //если id обьекта на который мы нажали = exit то происходит следующее
-        const item = event.target.closest("#reminder-one");
+        const item = event.target.closest(".reminder-one");
         //переменная item = все html элемента до родителя с классом .table-items-wrapper
         item.remove();
         //Удаляем данную переменную
     }
-    const item = event.target.closest("#reminder-one");
-    item.classList.toggle('yellow');
+    if(event.target.closest('.reminder-one')){
+        const item = event.target.closest(".reminder-one");
+        item.classList.toggle('yellow');
+    }
+    //Добавляет класс yellow при нажатии на todo
+    deleteAllSelected(event);
+    toggleActiveClassBTNCloseAllSelected(event);
 }
 //Удаление при клике на соответвующую кнопку
+//Добавляет класс yellow при нажатии на todo
 
 function validateTodo(e){
     if(!e.target.value.trim()){
@@ -145,3 +149,31 @@ function forInput(e){
     validateTodo(e);
 }
 //Функции для input
+
+function toggleActiveClassBTNCloseAllSelected(event){
+    if(event.target.closest('.reminder-one')
+        && document.querySelectorAll('.yellow').length === 0){
+        document.getElementById('exit-all').classList.toggle('active');
+    }
+    let test = [...document
+        .getElementById('exit-all').classList];
+    if(event.target.closest('.reminder-one')
+        && document
+            .querySelectorAll('.yellow')
+            .length === 1
+        && !test.includes('active')){
+        document.getElementById('exit-all').classList.toggle('active');
+    }
+}
+//Функция которая решает удалять или добавлять класс active кнопке exit-all
+
+function deleteAllSelected(event){
+    if(event.target.className === 'active'){
+        const deleted = document
+            .querySelectorAll('.yellow');
+        deleted.forEach((elem) => elem.remove());
+        document.getElementById('exit-all').classList.toggle('active');
+    }
+
+}
+//Функция которая удаляет обозначеные туду

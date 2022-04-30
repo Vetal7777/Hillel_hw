@@ -2,8 +2,9 @@
     display: flex;
     min-height: 50vh;
     flex-direction: column;
+    position: relative;
 }
-div#reminder-one {
+div.reminder-one {
     box-sizing: border-box;
     overflow-x: auto;
     width: 100%;
@@ -15,20 +16,20 @@ div#reminder-one {
     column-gap: 30px;
     cursor: pointer;
 }
-div#reminder-one:hover .condition{
+div.reminder-one:hover .condition{
     background-color: lightgrey;
 }
-div#reminder-one:hover #exit span{
+div.reminder-one:hover .exit span{
     background-color: darkred;
 }
-div#reminder-one p {
+div.reminder-one p {
     display: flex;
     justify-content: flex-start;
     font-family: sans-serif;
     font-size: small;
     width: 100%;
 }
-div#reminder-one .condition {
+div.reminder-one .condition {
     min-width: 25px;
     min-height: 25px;
     border-radius: 50%;
@@ -37,7 +38,7 @@ div#reminder-one .condition {
     justify-content: center;
     align-items: center;
 }
-#exit {
+.exit {
     padding: 0;
     cursor: pointer;
     display: flex;
@@ -48,26 +49,26 @@ div#reminder-one .condition {
     box-sizing: border-box;
     margin: 0 10px 0 0;
 }
-#exit span{
+.exit span{
     position: absolute;
     background-color: lightgrey;
     width: 24px;
     height: 1px;
     top: 12px;
 }
-#exit span:first-child {
+.exit span:first-child {
     transform: rotate(45deg);
 }
-#exit span:nth-child(2) {
+.exit span:nth-child(2) {
     transform: rotate(135deg);
 }
-#reminder-one.yellow .condition span{
+.reminder-one.yellow .condition span{
     background-color: #0085ff;
     width: 15px;
     height: 15px;
     border-radius: 50%;
 }
-.btn-container{
+.work-container{
     display: flex;
     align-items: center;
     padding: 10px;
@@ -148,4 +149,25 @@ body {
 }
 .error.active{
     opacity: 0.7;
+}
+#exit-all{
+    border-radius: 12px;
+    background-color: lightgrey;
+    color: grey;
+    padding: 5px;
+    font-family: sans-serif;
+    font-size: smaller;
+    position: absolute;
+    top: -10px;
+    right: 20px;
+    z-index: 2;
+    cursor: pointer;
+    opacity: 0;
+}
+#exit-all.active{
+    opacity: 0.7;
+}
+#exit-all.active:hover{
+    background-color: #0085ff;
+    color: white;
 }
