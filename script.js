@@ -91,12 +91,23 @@ Hamburger.prototype.askTypeOfTopping = function (){
     const result = this.validateTopping(userTopping,typesToppings);
     if(result){
         console.log(`User's topping is possible`);
-        this.topings.push(userTopping);
-        console.log(`Add topping ${userTopping}`);
-        this.price += Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].price;
-        console.log(`Plus to price toppings cost ${Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].price}$`);
-        this.calories += Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].calories;
-        console.log(`Plus to calories toppings calories ${Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].calories}cal`);
+        if(this.topings.includes(userTopping)){
+            this.topingsQuality.slice(++this.topingsQuality[this.topings.indexOf(userTopping)],this.topings.indexOf(userTopping));
+            console.log(`Qiality of ${userTopping} ${this.topingsQuality[this.topings.indexOf(userTopping)]}`);
+            this.price += Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].price;
+            console.log(`Plus to price toppings cost ${Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].price}$`);
+            this.calories += Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].calories;
+            console.log(`Plus to calories toppings calories ${Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].calories}cal`);
+        }else{
+            this.topings.push(userTopping);
+            console.log(`Add topping ${userTopping}`);
+            this.topingsQuality.push(1);
+            console.log(`Qiality of ${userTopping} 1`);
+            this.price += Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].price;
+            console.log(`Plus to price toppings cost ${Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].price}$`);
+            this.calories += Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].calories;
+            console.log(`Plus to calories toppings calories ${Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].calories}cal`);
+        }
         this.askAboutAddToppings();
     }
 
@@ -118,12 +129,25 @@ Hamburger.prototype.validateTopping = function (userTopping,toppingOptions){
 }
 //Validate user's answer about topping of burger
 Hamburger.prototype.answerOnTheEnd = function (){
-    console.log(`Write user's order`);
-    alert(`You order ${this.size.toLowerCase()} burger 
-    Price ${this.price}$,
-    Calories ${this.calories}cal`);
+    if(this.topings.length){
+        console.log(`Write user's order`);
+        let toppings = '';
+        for(let i = 0; i < this.topings.length;i++){
+            toppings += `${this.topings[i].toLowerCase()} ${this.topingsQuality[i]}x ,`;
+        }
+        alert(`You order ${this.size.toLowerCase()} burger
+        with: ${toppings} 
+        Price: ${this.price}$,
+        Calories: ${this.calories}cal`);
+    }else{
+        console.log(`Write user's order`);
+        alert(`You order ${this.size.toLowerCase()} burger 
+        Price: ${this.price}$,
+        Calories: ${this.calories}cal`);
+    }
 }
 Hamburger.prototype.playAllFunc = function (){
+    this.topingsQuality = [];
     this.askBurgerSize();
     this.askAboutAddToppings();
 }
