@@ -1,155 +1,127 @@
-const SIZES = {
-    SMALL:{
+const sizes = {
+    small:{
         price: 50,
         calories: 20,
     },
-    MIDDLE:{
+    middle:{
         price: 75,
         calories: 30,
     },
-    BIG:{
+    big:{
         price: 100,
         calories: 40,
     },
 };
 
-const TOPINGS = {
-    CHEESE:{
+const toppings = {
+    cheese:{
         price: 10,
         calories: 20,
     },
-    SALATE:{
+    salade:{
         price: 20,
         calories: 5,
     },
-    POTATOE:{
+    potato:{
         price: 15,
         calories: 10,
     },
-    SEASONING:{
+    condiment:{
         price: 15,
         calories: 0,
     },
-    MAYONEZ:{
+    mayonnaise:{
         price: 20,
         calories: 5,
     },
 };
 
 function Hamburger(){
-    this.topings = [];
+    this.toppings = [];
 }
-const doubleCheeseburger = new Hamburger();
-Hamburger.prototype.askBurgerSize = function (){
-    const sizeOptions = Object.keys(SIZES);
-    console.log(`Ask size of burger one of ${sizeOptions}`);
-    let userSize = prompt(`What size of burger do you want?(${sizeOptions})`,'SMALL');
-    let result = this.validateSize(userSize,sizeOptions);
-    if (result){
-        console.log(`User's size is possible`);
-        this.size = userSize;
-        console.log(`Burger size ${this.size}`);
-        this.price = Object.values(SIZES)[sizeOptions.indexOf(this.size)].price;
-        console.log(`Burger price ${this.price}$`);
-        this.calories = Object.values(SIZES)[sizeOptions.indexOf(this.size)].calories;
-        console.log(`Burger calories ${this.calories}cal`);
-    }
-};
-//Ask about size of burger
-//Add:
-// - size
-// - price
-// - calories
-Hamburger.prototype.validateSize = function (userSize,sizeOptions){
-    console.log(`Validate user's size`);
-    if (userSize === null
-        || !userSize.trim()
-        || !sizeOptions.includes(userSize)){
-        console.log(`ERROR , size is not possible.`)
-        this.askBurgerSize();
-        return false;
-    }
-    return true;
-}
-//Validate user's answer about size of burger
-Hamburger.prototype.askAboutAddToppings = function (){
-    console.log(`Ask user ,does he want add topping or no`);
-    let addToppings = confirm(`Do yo want add toppings to your burger?`);
-    if(addToppings){
-        console.log(`Add`);
-        this.askTypeOfTopping();
-    }else{
-        console.log(`Don't add`);
-        this.answerOnTheEnd();
-    }
-}
-//Ask user about add toppings for burger
-Hamburger.prototype.askTypeOfTopping = function (){
-    const typesToppings = Object.keys(TOPINGS);
-    console.log(`Ask type of topping from ${typesToppings}`);
-    const userTopping = prompt(`What topping do you want?${typesToppings}`,`CHEESE`);
-    const result = this.validateTopping(userTopping,typesToppings);
-    if(result){
-        console.log(`User's topping is possible`);
-        if(this.topings.includes(userTopping)){
-            this.topingsQuality.slice(++this.topingsQuality[this.topings.indexOf(userTopping)],this.topings.indexOf(userTopping));
-            console.log(`Qiality of ${userTopping} ${this.topingsQuality[this.topings.indexOf(userTopping)]}`);
-            this.price += Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].price;
-            console.log(`Plus to price toppings cost ${Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].price}$`);
-            this.calories += Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].calories;
-            console.log(`Plus to calories toppings calories ${Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].calories}cal`);
-        }else{
-            this.topings.push(userTopping);
-            console.log(`Add topping ${userTopping}`);
-            this.topingsQuality.push(1);
-            console.log(`Qiality of ${userTopping} 1`);
-            this.price += Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].price;
-            console.log(`Plus to price toppings cost ${Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].price}$`);
-            this.calories += Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].calories;
-            console.log(`Plus to calories toppings calories ${Object.values(TOPINGS)[typesToppings.indexOf(userTopping)].calories}cal`);
-        }
-        this.askAboutAddToppings();
-    }
+//Parent hamburger
 
-}
-//Ask what type of toppings user want
-//Plus:
-// - price
-// - calories
-Hamburger.prototype.validateTopping = function (userTopping,toppingOptions){
-    console.log(`Validate user's topping`);
-    if (userTopping === null
-        || !userTopping.trim()
-        || !toppingOptions.includes(userTopping)){
-        console.log(`ERROR , topping is not possible.`)
-        this.askTypeOfTopping();
-        return false;
+const order = new Hamburger;
+//Новый бургер
+
+const containerE = document.getElementById('container');
+const startContainerE = document.getElementById('start');
+const sizeContainerE = document.getElementById('sizes-container');
+const quastionContainerE = document.getElementById('question-container');
+const toppingsContainerE = document.getElementById('toppings-container');
+const resultContainerE = document.getElementById('result-container');
+//Контейнер сайта
+
+containerE.addEventListener('click',playOrderFunc);
+
+function playOrderFunc(event){
+    if(event.target.closest('.start-btn')){
+        order.hideContainer(startContainerE);
+        order.showContainer(sizeContainerE);
     }
-    return true;
-}
-//Validate user's answer about topping of burger
-Hamburger.prototype.answerOnTheEnd = function (){
-    if(this.topings.length){
-        console.log(`Write user's order`);
-        let toppings = '';
-        for(let i = 0; i < this.topings.length;i++){
-            toppings += `${this.topings[i].toLowerCase()} ${this.topingsQuality[i]}x ,`;
+    if(event.target.closest('.size')){
+        order.addUserSize(event);
+        order.hideContainer(sizeContainerE);
+        order.showContainer(quastionContainerE);
+    }
+    if (event.target.closest('.value')){
+        order.hideContainer(quastionContainerE);
+        if(event.target.closest('#yes')){
+            order.showContainer(toppingsContainerE);
         }
-        alert(`You order ${this.size.toLowerCase()} burger
-        with: ${toppings} 
-        Price: ${this.price}$,
-        Calories: ${this.calories}cal`);
-    }else{
-        console.log(`Write user's order`);
-        alert(`You order ${this.size.toLowerCase()} burger 
-        Price: ${this.price}$,
-        Calories: ${this.calories}cal`);
+        else if(event.target.closest('#no')){
+            order.showContainer(resultContainerE);
+            order.createResult();
+        }
+    }
+    if (event.target.closest('.topping')){
+        order.addUserTopping(event);
+        order.hideContainer(toppingsContainerE);
+        order.showContainer(quastionContainerE);
+    }
+    console.log(order);
+}
+Hamburger.prototype.hideContainer = function (containerE){
+    containerE.classList.toggle('active');
+}
+Hamburger.prototype.showContainer = function (containerE){
+    containerE.classList.toggle('active');
+}
+Hamburger.prototype.addUserSize = function (event){
+    const userSize = event.target.closest('.size').id;
+    this.size = userSize;
+    this.price = Object.values(sizes)[Object.keys(sizes).indexOf(this.size)].price;
+    this.calories = Object.values(sizes)[Object.keys(sizes).indexOf(this.size)].calories;
+}
+Hamburger.prototype.addUserTopping = function (event){
+   let userToppingName = event.target.closest('.topping').id;
+   let newTopping = {
+       name : userToppingName,
+       quality : 1,
+   };
+   this.toppings.push({...newTopping});
+   this.price += (Object.values(toppings)[Object.keys(toppings).indexOf(userToppingName)]).price;
+   this.calories += (Object.values(toppings)[Object.keys(toppings).indexOf(userToppingName)]).calories;
+}
+Hamburger.prototype.createResult = function (){
+    const sizeName = document.querySelector('.user-size span');
+    sizeName.innerText = this.size + ' burger';
+    const priceAndCaloies = document.getElementById('price-calories');
+    priceAndCaloies.innerHTML += `
+    <span>Price: ${this.price} $</span>
+    <span>Calories: ${this.calories} cal</span>
+    `;
+    if(this.toppings.length){
+        const titleToppings = document.getElementById('toppings-title');
+        titleToppings.classList.toggle('active');
+        const userOrder = document.getElementById('order');
+        const resultHTML = this.toppings.reduce((acc,elem) => acc += `                <div class="toppings">
+                    <div class="topping">
+                    <span class="img-container">
+                        <img src="images/${elem.name}.jpeg" alt="topping">
+                    </span>
+                        <span>${elem.name}</span>
+                    </div>`,``);
+        userOrder.innerHTML += resultHTML;
     }
 }
-Hamburger.prototype.playAllFunc = function (){
-    this.topingsQuality = [];
-    this.askBurgerSize();
-    this.askAboutAddToppings();
-}
-doubleCheeseburger.playAllFunc();
-console.log(doubleCheeseburger);

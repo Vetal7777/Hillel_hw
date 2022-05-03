@@ -7,5 +7,84 @@
     <title>Title</title>
 </head>
 <body>
+    <div id="container">
+        <div id="start" class="active">
+            <span class="start-btn">Start</span>
+        </div>
+        <div id="sizes-container">
+            <span class="title">What size do you want?</span>
+            <div class="sizes-burger">
+                <div class="size" id="small">
+                    <img src="images/burger.jpeg" alt="size">
+                    <span>SMALL</span>
+                </div>
+                <div class="size" id="middle">
+                    <img src="images/burger.jpeg" alt="size">
+                    <span>MIDDLE</span>
+                </div>
+                <div class="size" id="big">
+                    <img src="images/burger.jpeg" alt="size">
+                    <span>BIG</span>
+                </div>
+            </div>
+        </div>
+        <div id="question-container">
+            <span class="title">Do you want add some toppings?</span>
+            <div class="chose-container">
+                <span id="yes" class="value">Yes</span>
+                <span id="no" class="value">No</span>
+            </div>
+        </div>
+        <div id="toppings-container">
+            <span class="title">What topping do you want?</span>
+            <div class="toppings">
+                <div class="topping" id="cheese">
+                    <span class="img-container">
+                        <img src="images/cheese.jpeg" alt="topping">
+                    </span>
+                    <span>Cheese</span>
+                </div>
+                <div class="topping" id="salade">
+                    <span class="img-container">
+                        <img src="images/salade.jpeg" alt="topping">
+                    </span>
+                    <span>Salad</span>
+                </div>
+                <div class="topping" id="potato">
+                    <span class="img-container">
+                        <img src="images/potato.jpeg" alt="topping">
+                    </span>
+                    <span>Potato</span>
+                </div>
+                <div class="topping" id="mayonnaise">
+                    <span class="img-container">
+                        <img src="images/mayonnaise.jpeg" alt="topping">
+                    </span>
+                    <span>Mayonnaise</span>
+                </div>
+                <div class="topping" id="condiment">
+                    <span class="img-container">
+                        <img src="images/condiment.jpeg" alt="topping">
+                    </span>
+                    <span>Condiment</span>
+                </div>
+            </div>
+        </div>
+        <div id="result-container">
+            <span class="title">You ordered :</span>
+            <div id="order">
+                <div class="info">
+                    <div class="user-size">
+                        <img src="images/burger.jpeg" alt="size">
+                        <span></span>
+                    </div>
+                    <div id="price-calories"></div>
+                </div>
+                <div id="toppings-title">With:</div>
+                <div class="toppings">
+                </div>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
