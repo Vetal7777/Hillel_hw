@@ -1,1 +1,0 @@
-const menu = new Hamburger(document.querySelector('.hamburger-container'));
