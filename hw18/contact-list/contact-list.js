@@ -207,6 +207,7 @@ class ContactList{
             this.renderContact(contactObj);
             this.toggleActiveStatus(this.editContainer);
             this.editContainer.removeAttribute('id');
+            this.cleanAllFormInputValue(this.editContainer);
         }
     }
     //отправляем запрос по клику
