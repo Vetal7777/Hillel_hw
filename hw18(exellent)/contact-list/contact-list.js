@@ -1,6 +1,19 @@
 class ContactList{
     static endpoint = `http://nestapi-env.eba-9kgvuxij.eu-central-1.elasticbeanstalk.com/contacts`;
-    static CLASSES = {
+    static staticClasses = {
+        contactListContainer: 'contact-list-container',
+        //Контейнер всех контактов
+        addContainerForm: 'add-container-form',
+        //Форма добавления
+        editContainerForm: 'edit-container-form',
+        //Форма изменений
+        activateAddForm: 'activate-add-form',
+        //Кнопка показать форму добавления контакта
+        activeStatus: 'active',
+        //статус активный
+    }
+    //классы статичные с которыми мы работаем
+    static dynamicClasses = {
         contactItem: 'contact-item',
         contactItemContent: 'contact-item__content',
         contactItemPhoto: 'contact-item__photo',
@@ -13,21 +26,8 @@ class ContactList{
         contactItemDelete: 'contact-item__delete',
         contactItemDeleteLine: 'contact-item__delete-line',
         //Классы нашего динамичного html
-        contactListContainer: 'contact-list-container',
-        //Контейнер всех контактов
-        addContainerForm: 'add-container-form',
-        //Форма добавления
-        editContainerForm: 'edit-container-form',
-        //Форма изменений
-        buttonAdd: 'button-add',
-        //Кнопка добавить контакт
-        buttonEdit: 'button-edit',
-        //Кнопка изменить контакт
-        activateAddForm: 'activate-add-form',
-        //Кнопка показать форму добавления контакта
-        activeStatus: 'active',
-        //статус активный
     }
+    //классы динимические
     constructor(componentContainer) {
         this.setElements(componentContainer);
         //сохраняем все наши элементы
@@ -40,16 +40,16 @@ class ContactList{
         this.componentContainer = componentContainer;
         //Нужен
         this.addContainerForm = this.componentContainer
-            .querySelector(`.${ContactList.CLASSES.addContainerForm}`);
+            .querySelector(`.${ContactList.staticClasses.addContainerForm}`);
         //Нужен
         this.activateAddForm = this.componentContainer
-            .querySelector(`.${ContactList.CLASSES.activateAddForm}`);
+            .querySelector(`.${ContactList.staticClasses.activateAddForm}`);
         //Нужен
         this.contactListContainer = this.componentContainer
-            .querySelector(`.${ContactList.CLASSES.contactListContainer}`);
+            .querySelector(`.${ContactList.staticClasses.contactListContainer}`);
         //Нужен
         this.editContainerForm = this.componentContainer
-            .querySelector(`.${ContactList.CLASSES.editContainerForm}`);
+            .querySelector(`.${ContactList.staticClasses.editContainerForm}`);
         //Нужен
     }
     //сохраняем все наши элементы
@@ -63,21 +63,21 @@ class ContactList{
     //добавляем или удаляем disabled статус у кнопки
     renderContact(contact){
         this.contactListContainer.innerHTML += `
-            <div class=${ContactList.CLASSES.contactItem} id="${contact.id}">
-                <div class=${ContactList.CLASSES.contactItemContent}>
-                    <span class=${ContactList.CLASSES.contactItemPhoto}></span>
-                    <div class=${ContactList.CLASSES.contactFullNameContainer}>
-                        <span class=${ContactList.CLASSES.contactItemName}>${contact.name}</span>
-                        <span class=${ContactList.CLASSES.contactItemSurname}>${contact.lastName}</span>
+            <div class=${ContactList.dynamicClasses.contactItem} id="${contact.id}">
+                <div class=${ContactList.dynamicClasses.contactItemContent}>
+                    <span class=${ContactList.dynamicClasses.contactItemPhoto}></span>
+                    <div class=${ContactList.dynamicClasses.contactFullNameContainer}>
+                        <span class=${ContactList.dynamicClasses.contactItemName}>${contact.name}</span>
+                        <span class=${ContactList.dynamicClasses.contactItemSurname}>${contact.lastName}</span>
                     </div>
-                    <span class=${ContactList.CLASSES.contactItemPhone}>${contact.phone}</span>
+                    <span class=${ContactList.dynamicClasses.contactItemPhone}>${contact.phone}</span>
                 </div>
-                <div class=${ContactList.CLASSES.contactItemControl}>
-                    <div class=${ContactList.CLASSES.contactItemDelete}>
-                        <span class=${ContactList.CLASSES.contactItemDeleteLine}></span>
-                        <span class=${ContactList.CLASSES.contactItemDeleteLine}></span>
+                <div class=${ContactList.dynamicClasses.contactItemControl}>
+                    <div class=${ContactList.dynamicClasses.contactItemDelete}>
+                        <span class=${ContactList.dynamicClasses.contactItemDeleteLine}></span>
+                        <span class=${ContactList.dynamicClasses.contactItemDeleteLine}></span>
                     </div>
-                    <div class='${ContactList.CLASSES.contactItemEdit}'>Edit</div>
+                    <div class='${ContactList.dynamicClasses.contactItemEdit}'>Edit</div>
                 </div>
             </div>
         `;
@@ -126,16 +126,16 @@ class ContactList{
     }
     //Чистим все input в форме
     readFormName = (event) =>{
-        if(event.target.closest(`.${ContactList.CLASSES.addContainerForm}`)){
+        if(event.target.closest(`.${ContactList.staticClasses.addContainerForm}`)){
             this.validateForm(this.addContainerForm);
         }
-        if(event.target.closest(`.${ContactList.CLASSES.editContainerForm}`)){
+        if(event.target.closest(`.${ContactList.staticClasses.editContainerForm}`)){
             this.validateForm(this.editContainerForm);
         }
     }
     //определяем класс формы
     sendInquiryOnCLick = (event) =>{
-        if(event.target.closest(`.${ContactList.CLASSES.buttonAdd}`)){
+        if(event.target.closest(`.${ContactList.staticClasses.addContainerForm} button`)){
             //Если мы нажали на кнопку добавить
             const [,inputName, inputSurname, inputPhone,] = this.addContainerForm.children;
             //ищем input у в нашей форме
@@ -158,7 +158,7 @@ class ContactList{
             //Чистим все наши input
         }
 
-        if(event.target.closest(`.${ContactList.CLASSES.buttonEdit}`)){
+        if(event.target.closest(`.${ContactList.staticClasses.editContainerForm} button`)){
             //Ecли нажали копку изменить в форме
             const contactObj = this.promice
                 .then(contacts => contacts
@@ -188,14 +188,14 @@ class ContactList{
     }
     //отправляем запрос по клику
     readActiveClick(event){
-        if(event.target.closest(`.${ContactList.CLASSES.activateAddForm}`)){
+        if(event.target.closest(`.${ContactList.staticClasses.activateAddForm}`)){
             this.toggleActiveStatus(this.activateAddForm);
             this.toggleActiveStatus(this.addContainerForm);
         }
     }
     //Выясняем на какую кнопку актив юзер нажал
     toggleActiveStatus(container){
-        container.classList.toggle(ContactList.CLASSES.activeStatus);
+        container.classList.toggle(ContactList.staticClasses.activeStatus);
     }
     //Убираем или добавляем актив статус контейнера
     readContactId(event){
@@ -203,17 +203,17 @@ class ContactList{
     }
     //узнаем id контакта
     readContactElement(event){
-        return event.target.closest(`.${ContactList.CLASSES.contactItem}`);
+        return event.target.closest(`.${ContactList.dynamicClasses.contactItem}`);
     }
     //Узнаем элемент на который был клик
     validateActiveClass(container){
         return [...container.classList]
-            .includes(ContactList.CLASSES.activeStatus);
+            .includes(ContactList.staticClasses.activeStatus);
     }
     //проверяем активный статус у контейнера true - active ,false - default
     toggleEditValue(contact){
         const contactItemEdit = contact
-            .querySelector(`.${ContactList.CLASSES.contactItemEdit}`);
+            .querySelector(`.${ContactList.dynamicClasses.contactItemEdit}`);
         if(this.validateActiveClass(contact)){
             contactItemEdit.innerText = 'Edition';
         }else{
@@ -222,11 +222,11 @@ class ContactList{
     }
     //меняем innerText контейнера в зависимости от статуса контакта
     readContactClick(event){
-        if(event.target.closest(`.${ContactList.CLASSES.contactItemDelete}`)){
+        if(event.target.closest(`.${ContactList.dynamicClasses.contactItemDelete}`)){
             this.deleteContact(this.readContactId(event));
             this.readContactElement(event).remove();
         }
-        if(event.target.closest(`.${ContactList.CLASSES.contactItemEdit}`)){
+        if(event.target.closest(`.${ContactList.dynamicClasses.contactItemEdit}`)){
             this.doOnClickEdit(event);
         }
     }
@@ -238,7 +238,7 @@ class ContactList{
         //отображаем edit контейнер если он спрятан
         this.editContainerForm.id = this.readContactId(event);
         const lastActiveContact = [...this.contactListContainer.children]
-            .find(contact => [...contact.classList].includes(ContactList.CLASSES.activeStatus));
+            .find(contact => [...contact.classList].includes(ContactList.staticClasses.activeStatus));
         //находим наш старый активный контакт (если он есть)
         if(lastActiveContact){
             this.toggleActiveStatus(lastActiveContact);
