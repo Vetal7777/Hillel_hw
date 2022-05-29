@@ -99,19 +99,20 @@ class ContactList{
     }
     //Проверяем заполненный ли input или нет, возвращает нам value
     validateForm(form){
-        const [,inputTitle,inputSurname,inputPhone,button] = form.children;
-        if(this.validateInput(inputTitle)
-            && this.validateInput(inputSurname)
-            && this.validateInput(inputPhone)
-            && button.disabled){
-            this.toggleButtonDisableStatus(button);
-        }
-        if((!this.validateInput(inputTitle)
-                || !this.validateInput(inputSurname)
-                || !this.validateInput(inputPhone))
-            && !button.disabled){
-            this.toggleButtonDisableStatus(button);
-        }
+        let validate = 1;
+        const button = form.querySelector('button');
+        const inputs = [...form
+            .querySelectorAll('input')];
+        inputs
+            .forEach(input => {
+                validate *= this.validateInput(input);
+                if(!validate && !button.disabled){
+                    this.toggleButtonDisableStatus(button);
+                }
+                if(validate && button.disabled){
+                    this.toggleButtonDisableStatus(button);
+                }
+            });
     }
     //проверяем правильность набора формы перед отправкой запроса
     cleanInputValue(input){
@@ -119,10 +120,9 @@ class ContactList{
     }
     //Чистим input
     cleanAllFormInputValue(form){
-        const [,inputName,inputSurname,inputPhone,] = form.children;
-        this.cleanInputValue(inputName);
-        this.cleanInputValue(inputSurname);
-        this.cleanInputValue(inputPhone);
+        [...form
+            .querySelectorAll('input')]
+            .forEach(input => this.cleanInputValue(input));
     }
     //Чистим все input в форме
     readFormName = (event) =>{
@@ -134,15 +134,15 @@ class ContactList{
         }
     }
     //определяем класс формы
-    sendInquiryOnCLick = (event) =>{
+    onClickAddButton(event){
         if(event.target.closest(`.${ContactList.staticClasses.addContainerForm} button`)){
             //Если мы нажали на кнопку добавить
-            const [,inputName, inputSurname, inputPhone,] = this.addContainerForm.children;
+            const [inputName, inputSurname, inputPhone] = [...this.addContainerForm.querySelectorAll('input')];
             //ищем input у в нашей форме
             const newContact = {
-              name: inputName.value,
-              lastName: inputSurname.value,
-              phone: inputPhone.value,
+                name: inputName.value,
+                lastName: inputSurname.value,
+                phone: inputPhone.value,
             };
             //Создали новый обьект с значениями который ввел наш пользователь ранее
             this.addContact(newContact)
@@ -157,14 +157,16 @@ class ContactList{
             this.cleanAllFormInputValue(this.addContainerForm);
             //Чистим все наши input
         }
-
+    }
+    //если нажимаем на добавить контакт button
+    onClickEditButton(event){
         if(event.target.closest(`.${ContactList.staticClasses.editContainerForm} button`)){
             //Ecли нажали копку изменить в форме
             const contactObj = this.promice
                 .then(contacts => contacts
                     .find(contact => contact.id === this.editContainerForm.id));
             //Получаем обьект нашего контакта
-            const [,inputName, inputSurname, inputPhone,] = this.editContainerForm.children;
+            const [inputName, inputSurname, inputPhone] = [...this.editContainerForm.querySelectorAll('input')];
             //Получаем наши все input формы
             contactObj.name = inputName.value;
             contactObj.lastName = inputSurname.value;
@@ -185,6 +187,11 @@ class ContactList{
             this.cleanAllFormInputValue(this.editContainerForm);
             //Чистим все input формы
         }
+    }
+    //что делаем при клике на edit button
+    sendInquiryOnCLick = (event) =>{
+        this.onClickAddButton(event);
+        this.onClickEditButton(event);
     }
     //отправляем запрос по клику
     readActiveClick(event){
@@ -227,11 +234,11 @@ class ContactList{
             this.readContactElement(event).remove();
         }
         if(event.target.closest(`.${ContactList.dynamicClasses.contactItemEdit}`)){
-            this.doOnClickEdit(event);
+            this.onContactClickEdit(event);
         }
     }
     //Читаем на какую кнопку нажал юзер на контакте
-    doOnClickEdit(event){
+    onContactClickEdit(event){
         if(!this.validateActiveClass(this.editContainerForm)){
             this.toggleActiveStatus(this.editContainerForm);
         }
@@ -249,7 +256,7 @@ class ContactList{
         this.toggleEditValue(this.readContactElement(event));
     }
     //что мы делаем когда нажимаем на кнопку edit
-    doOnClick = (event) => {
+    onClick = (event) => {
         this.sendInquiryOnCLick(event);
         //отправляет запрос по клику
         //отправляет запрос если мы нажали на buttonAdd || buttonEdit
@@ -264,7 +271,7 @@ class ContactList{
     //что мы делаем при клике
     setAddEventsListeners(){
         this.componentContainer.addEventListener('keyup',this.readFormName);
-        this.componentContainer.addEventListener('click',this.doOnClick);
+        this.componentContainer.addEventListener('click',this.onClick);
     }
     //Добавляем все addEventListener
     getContacts(){
