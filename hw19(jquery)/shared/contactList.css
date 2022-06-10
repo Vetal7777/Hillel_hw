@@ -1,0 +1,198 @@
+.component__contact-list{
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    margin: 20px;
+    background-color: #f2f1ef;
+}
+.add-container{
+    display: flex;
+    border-radius: 10px;
+    padding: 20px;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+.component__contact-list input{
+    padding: 10px;
+}
+.component__contact-list button{
+    padding: 10px;
+}
+.contact-photo-add{
+    margin-right: 20px;
+}
+.contact-photo-edit{
+    margin:20px auto;
+}
+.button-edit{
+    background-color: white;
+}
+.contact-item__photo,
+.contact-photo-edit,
+.contact-photo-add{
+    width: 35px;
+    height: 35px;
+    background-image: url('images/photo_ico.jpg');
+    background-size: cover;
+    border-radius: 50%;
+}
+.contact-list-work-container{
+    display: flex;
+    border-radius: 10px;
+    min-height: 300px;
+    padding: 20px;
+}
+.add-container-form{
+    display: none;
+    overflow: hidden;
+    border-radius: 10px;
+    justify-content: space-between;
+    width: 100%;
+}
+.add-container-form input{
+    flex-grow: 1;
+    background-color: white;
+    border-left: 1px solid #f2f1ef;
+}
+.add-container-form .input-name-add{
+    border-radius: 10px 0 0 10px;
+}
+.add-container-form button{
+    flex-basis: 10%;
+    background-color: white;
+    border: none;
+    color: #0085ff;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.add-container-form button:hover{
+    color: lightgrey;
+}
+.add-container-form.active{
+    display: flex;
+}
+.activate-add-form{
+    width: 25px;
+    height: 25px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background-color: white;
+    cursor: pointer;
+}
+.activate-add-form.active{
+    display: flex;
+}
+.activate-add-form:hover .activate-add-form__line{
+    background-color: lightgrey;
+}
+.activate-add-form__line{
+    width: 15px;
+    display: flex;
+    background-color: #0085ff;
+    height: 2px;
+}
+.activate-add-form__line:nth-child(2){
+    transform: rotate(90deg);
+    position: absolute;
+}
+.contact-list-container{
+    display: flex;
+    border-radius: 10px;
+    justify-content: space-between;
+    flex-direction: column;
+    flex-basis: 60%;
+    row-gap: 20px;
+}
+.edit-container-form{
+    display: none;
+    flex-direction: column;
+    border-radius: 10px;
+    background-color: white;
+    position: fixed;
+    right: 40px;
+    overflow: hidden;
+}
+.edit-container-form input{
+    border-top: 1px solid #f2f1ef;
+}
+.edit-container-form.active{
+    display: flex;
+}
+button:disabled{
+    color: white;
+    cursor: default;
+}
+button:disabled:hover{
+    color: white;
+}
+.contact-item{
+    display: flex;
+    justify-content: space-between;
+    border-radius: 10px;
+    padding: 20px;
+    background-color: white;
+}
+.contact-item__content{
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+}
+.contact-item__control{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-end;
+}
+.contact__full-name-container{
+    cursor: default;
+}
+.contact-item__edit{
+    color: #0085ff;
+    font-size: 15px;
+    cursor: pointer;
+}
+.active .contact-item__edit{
+    color: red;
+}
+.contact-item__edit:hover{
+    color: red;
+}
+.contact-item__delete{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 25px;
+    min-height: 25px;
+    position: relative;
+    transform: rotate(45deg);
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #f2f1ef;
+}
+.contact-item__delete-line{
+    display: flex;
+    background-color: red;
+    height: 1px;
+    width: 15px;
+}
+.contact-item__delete:hover .contact-item__delete-line{
+    background-color: white;
+}
+.contact-item__delete-line:nth-child(2){
+    position: absolute;
+    transform: rotate(90deg);
+}
+.contact-item__phone{
+    color: #0085ff;
+}
+.button-edit{
+    color: #0085ff;
+    cursor: pointer;
+}
+.button-edit:hover{
+    color: lightgrey;
+}
