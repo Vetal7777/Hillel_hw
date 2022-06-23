@@ -18,7 +18,6 @@ export default class TodoController{
         };
         this.#view = view;
         this.#model = new TodoModel();
-        this.init();
     }
     completeTodo = (id) => {
         const obj = this.#todos
@@ -28,6 +27,13 @@ export default class TodoController{
             .editTodo(id,obj);
         this.#view
             .setCompletedTodoElement(obj.id);
+    }
+    convertEditionTodo(todo,fixesObj){
+        Object.keys(fixesObj)
+            .forEach(key => {
+                todo[key] = fixesObj[key];
+            })
+        return todo;
     }
     deleteTodo = (id) =>{
         this.#model
@@ -42,13 +48,6 @@ export default class TodoController{
         this.#view
             .editTodoElement(editedTodo);
 
-    }
-    convertEditionTodo(todo,fixesObj){
-        Object.keys(fixesObj)
-            .forEach(key => {
-                todo[key] = fixesObj[key];
-            })
-        return todo;
     }
     getOptions(){
         return this.#options;

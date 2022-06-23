@@ -23,9 +23,6 @@ export default class TodoEditForm{
             <button class="${TodoEditForm.editFormClasses.todoComponentButtonEdit}">Edit Todo</button>
         `;
     }
-    setContainer(){
-        this.#editFormContainer = this.#mainContainer.querySelector(`.${TodoEditForm.editFormClasses.todoComponentEditForm}`);
-    }
     editTodo(event){
         if(event.target.closest(`.${TodoEditForm.editFormClasses.todoComponentButtonEdit}`)){
             return this.getAllInputsForm()
@@ -46,6 +43,9 @@ export default class TodoEditForm{
     }
     init(container){
         this.#mainContainer = container;
+    }
+    setContainer(){
+        this.#editFormContainer = this.#mainContainer.querySelector(`.${TodoEditForm.editFormClasses.todoComponentEditForm}`);
     }
     setFormId(id){
         this.#editFormContainer.id = TodoEditForm.editFormIds.startIds + id;

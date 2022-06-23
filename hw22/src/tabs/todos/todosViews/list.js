@@ -24,10 +24,6 @@ export default class TodoList{
     cancelEditionTodo(todo){
         todo.classList.remove(TodoList.listClasses.edition);
     }
-    createTodos = (todos) =>{
-        this.#listContainer =this.#mainContainer.querySelector(`.${TodoList.listClasses.todoComponentList}`);
-        todos.then(r => this.#listContainer.innerHTML = r.map(this.createTodo).join(''));
-    }
     createTodo(todo){
         return `
             <div class="${TodoList.listClasses.todoItemContainer} ${(todo.isComplete) ? TodoList.listClasses.completed : ''}" id="${todo.id}">
@@ -41,6 +37,9 @@ export default class TodoList{
                 </div>
             </div>
         `;
+    }
+    createTodos = (todos) =>{
+        todos.then(r => this.#listContainer.innerHTML = r.map(this.createTodo).join(''));
     }
     deleteTodo(event){
         if(event.target.closest(`.${TodoList.listClasses.todoItemDelete}`)){
@@ -66,6 +65,12 @@ export default class TodoList{
                 }
             }))
     }
+    getSelectedTodo(event){
+        this.#selectedTodo = event.target.closest(`.${TodoList.listClasses.todoItemContainer}`);
+    }
+    init(container){
+        this.#mainContainer = container;
+    }
     searchLastEditSelectTodo(){
         return this.#mainContainer
             .querySelector(`.${TodoList.listClasses.edition}`);
@@ -82,6 +87,9 @@ export default class TodoList{
             .classList
             .add(TodoList.listClasses.completed);
     }
+    setContainer(){
+        this.#listContainer =this.#mainContainer.querySelector(`.${TodoList.listClasses.todoComponentList}`);
+    }
     setDefaultAppearance(todo){
         if(todo) todo.classList.remove(TodoList.listClasses.edition);
     }
@@ -95,11 +103,5 @@ export default class TodoList{
             this.setEditionTodo(this.#selectedTodo);
             return this.#selectedTodo.id;
         }
-    }
-    getSelectedTodo(event){
-        this.#selectedTodo = event.target.closest(`.${TodoList.listClasses.todoItemContainer}`);
-    }
-    init(container){
-        this.#mainContainer = container;
     }
 }

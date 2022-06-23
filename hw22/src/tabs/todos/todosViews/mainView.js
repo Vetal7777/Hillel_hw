@@ -32,9 +32,8 @@ export default class TodoMainView{
             .addNewTodoElement(todo);
     }
     createComponent = () =>{
+        setTimeout(() => this.setContainers(),0);
         setTimeout(() => this.#list.createTodos(this.#options.onGetTodos()),0);
-        setTimeout(() => this.#addForm.setContainer(),0);
-        setTimeout(() => this.#editForm.setContainer(),0);
         return `
             <div class="${TodoMainView.mainClasses.todoComponentContainer}">
                 <div class="${TodoMainView.mainClasses.todoComponentAddForm} ${TodoMainView.mainClasses.form}">
@@ -53,13 +52,13 @@ export default class TodoMainView{
         this.#editForm
             .hideForm();
     }
-    getButtonForm(event){
-        return this.getTargetForm(event)
-            .querySelector('button');
-    }
     getAllInputsForm(event){
         return [...this.getTargetForm(event)
             .querySelectorAll('input')];
+    }
+    getButtonForm(event){
+        return this.getTargetForm(event)
+            .querySelector('button');
     }
     getTargetForm(event){
         return event.target.closest('.form');
@@ -103,13 +102,18 @@ export default class TodoMainView{
        this.#list
            .renderTodos(todos);
     }
-    setEventListeners(){
-        this.#container.addEventListener('click',this.onClick);
-        this.#container.addEventListener('keyup',this.validateForm);
-    }
     setCompletedTodoElement(id){
         this.#list
             .setCompletedTodoElement(id);
+    }
+    setContainers(){
+        this.#addForm.setContainer();
+        this.#list.setContainer();
+        this.#editForm.setContainer();
+    }
+    setEventListeners(){
+        this.#container.addEventListener('click',this.onClick);
+        this.#container.addEventListener('keyup',this.validateForm);
     }
     setViews(){
         this.#addForm = new TodoAddForm(this.#container);

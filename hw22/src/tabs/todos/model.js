@@ -6,9 +6,8 @@ export default class TodoModel{
     constructor() {
         this.#http = new Http();
     }
-    getAllTodos(){
-        return this.#http.getAll()
-            .then(r => this.#todos = r);
+    addTodo(obj){
+        return this.#http.add({...obj,isComplete : false});
     }
     deleteTodo(id){
         this.#http.delete(id);
@@ -16,7 +15,8 @@ export default class TodoModel{
     editTodo(id,obj){
         return this.#http.edit(id,obj);
     }
-    addTodo(obj){
-        return this.#http.add({...obj,isComplete : false});
+    getAllTodos(){
+        return this.#http.getAll()
+            .then(r => this.#todos = r);
     }
 }
