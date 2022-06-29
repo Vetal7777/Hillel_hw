@@ -1,0 +1,113 @@
+.paint
+  &__container
+    background-color: #f0f0f0
+    height: 100%
+    border-radius: 10px
+    padding: 5px 1vw
+    margin: 1vw
+    overflow: hidden
+    display: flex
+    flex-direction: column
+    justify-content: space-between
+  &__tablet-container
+    width: 100%
+    height: 80vh
+    overflow: hidden
+  &__tablet
+    position: absolute
+    border-radius: 10px
+    background-color: white
+  &__control
+    padding: 1vw
+    height: 18vh
+    display: flex
+    justify-content: space-around
+    overflow: hidden
+    align-items: center
+  &__brush-width
+    display: flex
+    border-radius: 25px
+    background-color: white
+    justify-content: space-between
+    height: 50px
+    width: 150px
+    padding: 5px
+  &__brush-cycle
+    width: 20px
+    height: 20px
+  &__brush-width-item
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 40px
+    min-height: 40px
+    cursor: pointer
+    padding: 5px
+    border: 1px solid white
+    border-radius: 50%
+    &.selected
+      background-color: #24a3ffab
+      border-radius: 50%
+    &:hover
+      border: 1px solid #24a3ffab
+      border-radius: 50%
+  &__brush-cycle
+    background-color: black
+    border-radius: 50%
+    .small &
+      width: 10px
+      height: 10px
+    .middle &
+      width: 15px
+      height: 15px
+    .big &
+      width: 20px
+      height: 20px
+    .red &
+      background-color: red
+    .blue &
+      background-color: blue
+    .yellow &
+      background-color: yellow
+    .green &
+      background-color: green
+  &__brush-color
+    display: flex
+    border-radius: 25px
+    background-color: white
+    justify-content: space-between
+    height: 50px
+    width: 250px
+    padding: 5px
+  &__brush-color-item
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 40px
+    min-height: 40px
+    cursor: pointer
+    padding: 5px
+    border: 1px solid white
+    border-radius: 50%
+    &.selected
+      background-color: #24a3ffab
+      border-radius: 50%
+    &:hover
+      border: 1px solid #24a3ffab
+      border-radius: 50%
+  &__rubbish
+    border-radius: 50%
+    background-color: white
+    width: 50px
+    height: 50px
+    display: flex
+    align-items: center
+    justify-content: center
+    font-family: Arial
+    font-size: 13px
+    color: #24a3ffab
+    cursor: pointer
+    border: 1px solid white
+    padding: 6px
+    &:hover
+      border-color: #24a3ffab
