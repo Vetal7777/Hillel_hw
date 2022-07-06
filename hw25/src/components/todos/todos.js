@@ -72,9 +72,10 @@ export default class Todos extends React.Component{
     createTodo(newTodo){
         this.setState({...this.state,
             isCreateTodo:false,
-            todos: [...this.state.todos,{...newTodo,id:this.state.todos.length + 1}]
+            todos: [...this.state.todos,{...newTodo,
+                id:this.state.todos.length + 1,
+                isComplete: false,}]
         })
-        console.log(this.state.todos)
     }
     editTodo(editedTodo){
         this.setState({...this.state,

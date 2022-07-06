@@ -2,23 +2,16 @@ import './todo.css';
 import Button from "../../../shared/button/button";
 
 export default function Todo({todo,classesObj,onEditFunc,onDeleteFunc,onSetCompleteFunc}){
-    const innerDelete = () => {
-        return (
-            <>
-                <span className={classesObj.todoDeleteLine}/>
-                <span className={classesObj.todoDeleteLine}/>
-            </>
-        )
-    }
     return (
         <>
             <div className={`${classesObj.todoItem} ${todo.isComplete ? classesObj.completed : ''}`}>
                 <div className={classesObj.todoStatusContainer}>
                     <Button
                         className={classesObj.todoStatus}
-                        title={<span className={classesObj.todoStatusInner}/>}
-                        callBack={onSetCompleteFunc}
-                    />
+                        callBack={!todo.isComplete ? onSetCompleteFunc : null}
+                    >
+                        <span className={classesObj.todoStatusInner}/>
+                    </Button>
                 </div>
                 <div className={classesObj.todoContent}>
                     <span className={classesObj.todoTitle}>{todo.title}</span>
@@ -26,15 +19,17 @@ export default function Todo({todo,classesObj,onEditFunc,onDeleteFunc,onSetCompl
                 </div>
                 <div className={classesObj.todoControl}>
                     <Button
-                        title={'Edit'}
+                        children={'Edit'}
                         callBack={onEditFunc}
                         className={classesObj.todoEditButton}
                     />
                     <Button
                         callBack={onDeleteFunc}
                         className={classesObj.todoDeleteButton}
-                        title={innerDelete()}
-                    />
+                    >
+                        <span className={classesObj.todoDeleteLine}/>
+                        <span className={classesObj.todoDeleteLine}/>
+                    </Button>
                 </div>
             </div>
         </>

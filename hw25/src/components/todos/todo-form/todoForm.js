@@ -16,19 +16,23 @@ export default function TodoForm({obj,callBack,title,className}) {
                 title={title}
                 onSubmit={(event) => event.preventDefault()}
             >
-                <input
-                    onChange={setProperty}
-                    placeholder={'title'}
-                    value={state.title}
-                />
-                <input
-                    onChange={setProperty}
-                    placeholder={'body'}
-                    value={state.body}
-                />
+                {
+                    Object.entries(state)
+                        .filter(key => typeof key[1] === 'string')
+                        .map(elem => {
+                            return (
+                                <input
+                                    key={elem[0]}
+                                    onChange={setProperty}
+                                    placeholder={elem[0]}
+                                    value={elem[1]}
+                                />
+                            )
+                        })
+                }
                 <Button
                     callBack={() => callBack(state)}
-                    title={title}
+                    children={title}
                 />
             </form>
         </>
