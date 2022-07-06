@@ -1,0 +1,14 @@
+.todo__component{
+    display: flex;
+    margin: 20px;
+    padding: 20px;
+    height: calc(100vh - 20px * 2);
+    /*весь экран минус margin*/
+    border-radius: 10px;
+    background-color: #f2f1ef;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: center;
+    flex-direction: column;
+    font-family: Arial;
+}

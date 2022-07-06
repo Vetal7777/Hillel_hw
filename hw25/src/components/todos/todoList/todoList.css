@@ -1,0 +1,8 @@
+.todo__list{
+    flex-basis: 80%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    overflow: auto;
+}
