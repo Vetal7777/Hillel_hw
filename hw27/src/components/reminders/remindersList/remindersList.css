@@ -1,0 +1,6 @@
+.reminders__list{
+    height: 70vh;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}

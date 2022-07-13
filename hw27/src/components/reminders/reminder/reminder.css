@@ -1,0 +1,55 @@
+.reminder__item{
+    display: flex;
+    min-height: 50px;
+    align-items: center;
+    position: relative;
+    cursor: pointer;
+}
+.reminder__item:hover .delete-tem:before{
+    transform: translateX(100px);
+}
+.reminder__title{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    color: black;
+    font-size: 15px;
+    font-family: Arial;
+    border: none;
+    width: 100%;
+}
+.reminder__title:hover{
+    color: gray;
+}
+input.reminder__title{
+    color: gray;
+}
+.reminder__item::after{
+    content:'';
+    height: 1px;
+    background-color: lightgrey;
+    width: 100%;
+    right: 0;
+    position: absolute;
+    bottom: 0;
+}
+.delete-tem{
+    color: white;
+    background-color: red;
+    width: 100px;
+    height: 100%;
+    z-index: 1;
+    position: relative;
+    cursor: pointer;
+}
+.delete-tem:before{
+    content: '';
+    transition: all 0.7s ease 0s;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    background-color: white;
+    display: flex;
+    position: absolute;
+    transform: translateX(0px);
+}
