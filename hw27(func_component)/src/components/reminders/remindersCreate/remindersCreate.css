@@ -1,0 +1,43 @@
+.reminders__create-container{
+    width: 100%;
+    display: flex;
+    max-height: 50px;
+    justify-content: space-between;
+    align-items: center;
+}
+.reminders__create-container input{
+    border: none;
+    flex-grow: 1;
+    height: 100%;
+    font-size: 20px;
+}
+.reminders__create-container input::placeholder{
+    color: orange;
+    font-weight: bold;
+    font-size: 30px;
+}
+.reminders__create-container button{
+    width: 30px;
+    height: 30px;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    border-radius:50%;
+    background-color: orange;
+    border: 5px solid orange;
+}
+.reminders__create-container button:hover{
+    opacity: 0.5;
+}
+.reminders__create-container button .line{
+    background-color: white;
+    height: 5px;
+    display: flex;
+    width: 100%;
+}
+.reminders__create-container button .line:nth-child(2){
+    position: absolute;
+    transform: rotate(90deg);
+}
